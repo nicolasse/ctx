@@ -11,9 +11,7 @@ Reads the repo list from `context/config.json` at the workspace root and clones 
 
 ### 1. Read config
 
-Read `context/config.json`. Parse the `repos` array. Each entry has:
-- `name` — directory name at the workspace root
-- `url` — git clone URL
+Read `context/config.json`. Parse the `repos` array. Each entry is a plain URL string (the git clone URL).
 
 If `context/config.json` doesn't exist or has no `repos` key, tell the user and stop.
 
@@ -21,11 +19,12 @@ If the `repos` array is empty, tell the user there are no repos configured and s
 
 ### 2. Clone missing repos
 
-For each repo in the array:
+For each URL in the array:
 
-- Check if `{name}` already exists at the workspace root
+- Derive the directory name from the URL: take the last path segment and remove the `.git` suffix if present (e.g., `https://github.com/org/repo-a.git` becomes `repo-a`)
+- Check if that directory already exists at the workspace root
 - If it exists, mark as **skipped**
-- If it doesn't exist, run `git clone {url} {name}` and mark as **cloned**
+- If it doesn't exist, run `git clone {url}` (without specifying a target directory — git derives the name automatically) and mark as **cloned**
 
 If a clone fails, report the error but continue with the remaining repos.
 

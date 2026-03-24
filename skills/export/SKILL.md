@@ -23,7 +23,7 @@ List all directories at the workspace root. For each directory:
 - If it does, read its git remote origin URL (`git -C {dir} remote get-url origin`)
 - If it has no remote, warn the user and skip it
 
-Collect all found repos as `{ "name": "{dir}", "url": "{remote_url}" }`.
+Collect the remote URL string for each found repo.
 
 ### 3. Ask for context link
 
@@ -47,13 +47,13 @@ Write `context/config.json`:
 {
   "context": "{url or empty string}",
   "repos": [
-    { "name": "repo-a", "url": "https://github.com/org/repo-a.git" },
-    { "name": "repo-b", "url": "https://github.com/org/repo-b.git" }
+    "https://github.com/org/repo-a.git",
+    "https://github.com/org/repo-b.git"
   ]
 }
 ```
 
-Sort repos alphabetically by name.
+Sort repos alphabetically by URL.
 
 ### 6. Report
 
