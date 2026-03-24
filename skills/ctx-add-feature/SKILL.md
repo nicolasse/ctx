@@ -16,6 +16,10 @@ The user describes what they want to build. Can be vague ("I need follow-up remi
 
 ## Workflow
 
+### 0. Load Project Context
+
+If `context/index.md` exists, read it first. This is the big-picture map of the entire project — domain glossary, services, flows, and dependencies. Use it to inform your understanding of where the new feature fits, which services are involved, and what patterns already exist. This avoids redundant exploration in later steps.
+
 ### 1. Understand the Feature
 
 Start a conversation to understand what the user wants. Ask about:
