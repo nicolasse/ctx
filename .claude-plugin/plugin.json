@@ -1,0 +1,12 @@
+{
+  "name": "ctx",
+  "description": "A context layer for multi-repo workspaces. Maps features across repositories with product definitions, engineering contracts, and implementation docs — designed for AI-assisted development.",
+  "version": "2.0.0",
+  "author": {
+    "name": "nicolasse"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolasse/ctx"
+  }
+}

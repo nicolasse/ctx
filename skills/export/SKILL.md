@@ -1,9 +1,6 @@
 ---
-name: ctx-export
+name: export
 description: Scan workspace repos and export context/config.json with repo list and context link. Use to share or rebuild the workspace.
-metadata:
-  author: nicolasse
-  version: "1.0.0"
 ---
 
 # Export Context

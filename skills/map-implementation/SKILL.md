@@ -1,9 +1,6 @@
 ---
-name: ctx-map-implementation
+name: map-implementation
 description: Explore all repos in the workspace to build the implementation.md for a feature, mapping its current state end-to-end. Use when documenting how an existing feature is actually built.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # Map Feature Implementation

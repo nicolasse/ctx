@@ -1,9 +1,6 @@
 ---
-name: ctx-add-index
+name: add-index
 description: Scan workspace repos and generate context/index.md — a comprehensive big-picture map of the entire project including domain glossary, services, flows, and dependencies.
-metadata:
-  author: nicolasse
-  version: "1.0.0"
 ---
 
 # Generate Project Index
@@ -30,7 +27,9 @@ Record the full list of repos found.
 
 ### 2. Deep scan all repos
 
-**Use a single agent** to explore all repos thoroughly. The agent must build a complete understanding of:
+**MANDATORY: You MUST use the Agent tool** (subagent_type: "Explore", thoroughness: "very thorough") to perform this step. Do NOT skip the agent call or substitute it with your own exploration — even if you already have context from a previous step. The agent ensures a fresh, thorough, code-level scan.
+
+Launch a single Explore agent that covers all repos in one pass. The agent must build a complete understanding of:
 
 **Per repo:**
 - What it actually does (read code, not just README)
@@ -68,7 +67,7 @@ Record the full list of repos found.
 
 ### 3. Generate index.md
 
-From the deep scan, generate `context/index.md` following this exact structure. Write in **English**. Be thorough but concise — every line should add information.
+**Wait for the agent from step 2 to complete.** Use the agent's output as the primary source for generating `context/index.md`. Follow this exact structure. Write in **English**. Be thorough but concise — every line should add information.
 
 ```markdown
 # {Project Name} — Context Map

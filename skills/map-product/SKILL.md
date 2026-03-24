@@ -1,9 +1,6 @@
 ---
-name: ctx-map-product
+name: map-product
 description: Build the product.md for a feature by exploring the codebase and talking to the developer to define use cases, business rules, and scope. Use when mapping an existing feature's product definition.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # Map Feature Product
