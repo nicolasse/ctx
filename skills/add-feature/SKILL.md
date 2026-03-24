@@ -1,9 +1,6 @@
 ---
-name: ctx-add-feature
+name: add-feature
 description: Design and implement a new feature from scratch — product definition, engineering design, implementation, and validation. Use when building a feature that doesn't exist in the codebase yet.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # New Feature

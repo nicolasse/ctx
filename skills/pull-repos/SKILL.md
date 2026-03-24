@@ -1,9 +1,6 @@
 ---
-name: ctx-pull-repos
+name: pull-repos
 description: Clone all repos from config.json into the workspace root. Skips repos that already exist locally. Use to sync your workspace with the configured repo list.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # Pull Repos

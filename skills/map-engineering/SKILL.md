@@ -1,9 +1,6 @@
 ---
-name: ctx-map-engineering
+name: map-engineering
 description: Build the engineering.md for a feature by exploring the codebase to extract the key interfaces, constraints, and patterns. Use when mapping an existing feature's technical contracts.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # Map Feature Engineering

@@ -1,9 +1,6 @@
 ---
-name: ctx-init
+name: init
 description: Initialize a ctx workspace — name the project, explore all repos, and generate a workspace map. Use when setting up a new multi-repo project with ctx.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # Initialize Workspace

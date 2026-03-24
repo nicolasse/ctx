@@ -1,9 +1,6 @@
 ---
-name: ctx-add-use-case
+name: add-use-case
 description: Implement a new use case for an existing feature, maintaining consistency with product definitions and engineering contracts. Use when adding behavior to an already-mapped feature.
-metadata:
-  author: nicolasse
-  version: "2.0.0"
 ---
 
 # Add Use Case
