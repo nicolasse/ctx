@@ -3,7 +3,7 @@ name: ctx-add-feature
 description: Design and implement a new feature from scratch — product definition, engineering design, implementation, and validation. Use when building a feature that doesn't exist in the codebase yet.
 metadata:
   author: nicolasse
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # New Feature
@@ -32,7 +32,7 @@ Keep it short. Don't interrogate — 2-3 questions max per round, stop when you 
 
 Pick a kebab-case name for the feature. Confirm with the user.
 
-Create `features/{feature}/` and copy the three template files from `features/_template/`.
+Create `context/{feature}/` and copy the three template files from `context/_template/`.
 
 ### 3. Write product.md
 
@@ -47,9 +47,9 @@ Show it to the user. Iterate until they confirm. Write the file.
 
 ### 4. Design engineering.md
 
-Now look at the existing codebase to inform the technical design:
+Now look at the existing codebase to inform the technical design. **Use an agent to explore the repos** — spawn a single agent to search across all repos for relevant patterns, interfaces, and conventions:
 
-- List directories inside `repositories/` to understand what services exist
+- List directories at the workspace root (skip `context/`) to understand what services exist
 - Look at similar features to understand patterns, conventions, and how services communicate
 - Identify which repos will need changes for the new feature
 - Understand existing interfaces the new feature needs to integrate with
@@ -66,6 +66,8 @@ Write `engineering.md`. Keep it minimal — only the contracts that matter. Show
 ### 5. Implement
 
 Use the contract-reviewer agent definition (if available) and implement the feature respecting the contracts defined in `product.md` and `engineering.md`.
+
+**Use an agent for implementation** — when changes span multiple repos, spawn a single agent that has the full product and engineering context to implement across all affected repos.
 
 If the feature is large, break it into multiple chunks — one per use case or logical piece. After each chunk, review before continuing.
 
