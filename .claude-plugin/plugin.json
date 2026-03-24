@@ -5,8 +5,5 @@
   "author": {
     "name": "nicolasse"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nicolasse/ctx"
-  }
+  "repository": "https://github.com/nicolasse/ctx"
 }
