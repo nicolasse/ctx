@@ -3,31 +3,30 @@ name: ctx-init
 description: Initialize a ctx workspace — name the project, explore all repos, and generate a workspace map. Use when setting up a new multi-repo project with ctx.
 metadata:
   author: nicolasse
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # Initialize Workspace
 
 Sets up a ctx workspace: names the project, scans all repos, and generates the workspace map.
 
-Run this once after cloning and adding your repos to `repositories/`.
+Run this once after cloning your repos into the workspace root.
 
 ## Workspace Setup
 
 Before scanning repos, ensure the workspace has the required structure. If any of these are missing, create them:
 
-- `repositories/` — where all repos live
-- `features/` — where feature context files live
-- `features/_template/` — with the three template files (product.md, engineering.md, implementation.md)
-- `features/CLAUDE.md` — agent instructions for the features directory
+- `context/` — where feature context files live
+- `context/_template/` — with the three template files (product.md, engineering.md, implementation.md)
+- `context/CLAUDE.md` — agent instructions for the context directory
 - `CLAUDE.md` — workspace-level instructions
 
 The templates and instructions are bundled with this skill. If the files don't exist, generate them from the templates below.
 
-### features/CLAUDE.md
+### context/CLAUDE.md
 
 ```markdown
-# Features Context — Agent Instructions
+# Context — Agent Instructions
 
 This directory contains the product, engineering, and implementation context for each feature in the system. These files are the source of truth that AI agents use to understand, implement, and validate changes.
 
@@ -35,7 +34,7 @@ This directory contains the product, engineering, and implementation context for
 
 ## Structure
 
-features/
+context/
   _template/          # Templates for creating new features
   {feature-name}/
     product.md        # WHAT: product definition, use cases, business rules
@@ -56,7 +55,7 @@ features/
 When resolving a feature name from a user request, list the directories here and match semantically. Users may refer to features by aliases, abbreviations, or in different languages. If uncertain, ask.
 ```
 
-### features/_template/product.md
+### context/_template/product.md
 
 ```markdown
 # {Feature Name}
@@ -78,7 +77,7 @@ When resolving a feature name from a user request, list the directories here and
 - {What this feature does NOT do}
 ```
 
-### features/_template/engineering.md
+### context/_template/engineering.md
 
 ```markdown
 # {Feature Name} — Engineering
@@ -101,7 +100,7 @@ When resolving a feature name from a user request, list the directories here and
 - {How things are done in this feature, one line each}
 ```
 
-### features/_template/implementation.md
+### context/_template/implementation.md
 
 ```markdown
 # {Feature Name} — Implementation
@@ -149,18 +148,18 @@ This is a multi-repo workspace.
 
 ## Structure
 
-- `repositories/` — All repos live here. Each subdirectory is a repo.
-- `features/` — Product, engineering, and implementation context for each feature. See `features/CLAUDE.md`.
+- Repos live at the workspace root. Each subdirectory with a `.git` folder is a repo.
+- `context/` — Product, engineering, and implementation context for each feature. See `context/CLAUDE.md`.
 
 ## Repos
 
-The repos are all directories inside `repositories/`. To discover available repos, list that directory. Do not hardcode repo names — they may change.
+To discover available repos, list directories at the workspace root and check which ones contain a `.git` folder. Do not hardcode repo names — they may change.
 
-## Features Context
+## Context
 
-The `features/` directory contains the source of truth for understanding, implementing, and validating changes across repos.
+The `context/` directory contains the source of truth for understanding, implementing, and validating changes across repos.
 
-When working on a feature, always check `features/` for existing context before exploring repos from scratch.
+When working on a feature, always check `context/` for existing context before exploring repos from scratch.
 ```
 
 ## Workflow
@@ -173,13 +172,13 @@ Rename the root folder of the workspace to the project name (lowercase, kebab-ca
 
 If the folder is already named something other than the default, confirm with the user before renaming.
 
-### 2. Init features git
+### 2. Init context git
 
-If `features/` doesn't have a `.git` directory, run `git init` inside it so the project context is its own repo from the start.
+If `context/` doesn't have a `.git` directory, run `git init` inside it so the project context is its own repo from the start.
 
 ### 3. Discover repos
 
-List all directories inside `repositories/`.
+List all directories at the workspace root. Each directory with a `.git` folder is a repo. Skip `context/` — it's the context repo, not a code repo.
 
 ### 4. Deep scan each repo
 
@@ -193,7 +192,7 @@ For each repo, explore thoroughly to truly understand what it does:
 - Check package.json / pyproject.toml / go.mod for dependencies that reveal purpose
 - Follow imports and references to understand how code flows
 
-Use subagents to explore repos in parallel when possible.
+Use a single agent to explore all repos — cross-repo context matters more than parallelism.
 
 **The goal is to understand what each repo actually does, not what its README says it does.** READMEs are often outdated. The code is the truth.
 
@@ -241,7 +240,7 @@ Distill everything into a concise map. You explored deep — now write short. On
 | Payments | repo-a, repo-d | No |
 ```
 
-Write to `features/WORKSPACE.md`.
+Write to `context/WORKSPACE.md`.
 
 ### 8. Summary
 

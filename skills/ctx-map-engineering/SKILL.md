@@ -3,7 +3,7 @@ name: ctx-map-engineering
 description: Build the engineering.md for a feature by exploring the codebase to extract the key interfaces, constraints, and patterns. Use when mapping an existing feature's technical contracts.
 metadata:
   author: nicolasse
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # Map Feature Engineering
@@ -28,7 +28,7 @@ The user provides a **feature name**.
 
 ### Feature Resolution
 
-1. List all directories under `features/`
+1. List all directories under `context/`
 2. Match the user's request semantically
 3. **If confident:** confirm and proceed
 4. **If ambiguous or no match:** list available features and ask
@@ -37,7 +37,7 @@ If the feature directory doesn't exist yet, ask the user if they want to create 
 
 ### Overwrite Check
 
-If `features/{feature}/engineering.md` already exists and has content beyond the template:
+If `context/{feature}/engineering.md` already exists and has content beyond the template:
 - Show the user what's currently there
 - Ask explicitly: overwrite, merge with new findings, or cancel
 - Do NOT overwrite without confirmation
@@ -46,15 +46,17 @@ If `features/{feature}/engineering.md` already exists and has content beyond the
 
 ### Phase 1: Load existing context
 
-If available, read `features/{feature}/product.md` to understand what use cases to look for.
+If available, read `context/{feature}/product.md` to understand what use cases to look for.
 
 ### Phase 2: Discover and explore repos
 
-List directories inside `repositories/`. Explore relevant repos focusing on:
+List directories at the workspace root (skip `context/`). **Use an agent to explore the repos** — spawn a single agent to search across all repos for contracts, interfaces, and patterns. Focus on:
 
 - API contracts and event schemas — the boundaries between services
+- Inter-service communication — Kafka topics, SQS queues, RPC calls, HTTP endpoints with actual names
 - Shared types and interfaces — what other code depends on
-- Technical constraints visible in config, retries, timeouts, limits
+- Configuration — env vars, feature flags, and settings that affect behavior
+- Technical constraints visible in retries, timeouts, limits
 - Patterns that repeat across the feature's code
 
 ### Phase 3: Filter ruthlessly
@@ -68,7 +70,7 @@ You will find a lot. **Most of it doesn't belong in engineering.md.** Apply this
 
 ### Phase 4: Write engineering.md
 
-Follow the template at `features/_template/engineering.md`. Keep it minimal. When you include a code snippet, include **only** the type/schema itself — no surrounding context, no imports, no comments.
+Follow the template at `context/_template/engineering.md`. Keep it minimal. When you include a code snippet, include **only** the type/schema itself — no surrounding context, no imports, no comments.
 
 ### Phase 5: Review
 

@@ -3,7 +3,7 @@ name: ctx-map-implementation
 description: Explore all repos in the workspace to build the implementation.md for a feature, mapping its current state end-to-end. Use when documenting how an existing feature is actually built.
 metadata:
   author: nicolasse
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # Map Feature Implementation
@@ -18,7 +18,7 @@ The user provides a **feature name** (e.g., "follow-ups", "RAG catalog", "web ch
 
 ### Feature Resolution
 
-1. List all directories under `features/`
+1. List all directories under `context/`
 2. Match the user's request semantically (e.g., "seguimiento", "follow up", "followUps" → `follow-up/`)
 3. **If confident:** confirm which feature you matched and proceed
 4. **If ambiguous or no match:** list available features and ask the user to pick
@@ -27,7 +27,7 @@ If the feature directory doesn't exist yet, ask the user if they want to create 
 
 ### Overwrite Check
 
-If `features/{feature}/implementation.md` already exists and has content beyond the template:
+If `context/{feature}/implementation.md` already exists and has content beyond the template:
 - Show the user what's currently there
 - Ask explicitly: overwrite, merge with new findings, or cancel
 - Do NOT overwrite without confirmation
@@ -37,18 +37,18 @@ If `features/{feature}/implementation.md` already exists and has content beyond 
 ### Phase 1: Load existing context
 
 Read whatever already exists for this feature:
-- `features/{feature}/product.md` — understand what this feature is supposed to do
-- `features/{feature}/engineering.md` — understand the expected interfaces and constraints
+- `context/{feature}/product.md` — understand what this feature is supposed to do
+- `context/{feature}/engineering.md` — understand the expected interfaces and constraints
 
 These files give you a hypothesis of what to look for. If they don't exist or are empty, work from the feature name alone.
 
 ### Phase 2: Discover repos
 
-List all directories inside `repositories/` to discover available repos. Every subdirectory there is a repo to potentially explore.
+List all directories at the workspace root (skip `context/`). Each directory with a `.git` folder is a repo to potentially explore.
 
 ### Phase 3: Deep exploration across repos
 
-This is the critical phase. You must explore **all relevant repos** to build a complete picture of how this feature is implemented today. Use subagents to search in parallel across repos when possible.
+This is the critical phase. You must explore **all relevant repos** to build a complete picture of how this feature is implemented today. **Use a single agent** to explore across all repos — cross-repo context matters more than parallelism.
 
 For each repo that might be involved, search for:
 
@@ -69,17 +69,20 @@ Search strategy:
 
 From your exploration, build a complete picture:
 
-1. **Key files**: Every file that contains logic for this feature, organized by repo
-2. **Flows**: For each use case in `product.md` (or discovered behavior if no product.md), trace the step-by-step code path from trigger to outcome
-3. **Data model**: Actual schemas, tables, types — copy the real definitions from code
-4. **Communication**: Message queues, RPC calls, HTTP endpoints with actual names
-5. **Config**: Env vars and feature flags that affect behavior
-6. **Error handling**: What happens on failure — retries, dead letter queues, fallbacks
-7. **Known limitations**: Things that are missing, broken, or incomplete based on what you see in code vs what `product.md` or `engineering.md` expect
+1. **Entry points**: How does this feature get triggered? (UI action, cron job, event, API call)
+2. **Key files**: Every file that contains logic for this feature, organized by repo
+3. **Flows**: For each use case in `product.md` (or discovered behavior if no product.md), trace the step-by-step code path from trigger to outcome
+4. **Processing**: What transformations or logic happen at each step along the flow
+5. **Data model**: Actual schemas, tables, types — copy the real definitions from code
+6. **Communication**: Message queues, RPC calls, HTTP endpoints with actual names
+7. **Config**: Env vars and feature flags that affect behavior
+8. **Error handling**: What happens on failure — retries, dead letter queues, fallbacks
+9. **Edge cases & quirks**: Non-obvious behavior, performance considerations, known gotchas
+10. **Known limitations**: Things that are missing, broken, or incomplete based on what you see in code vs what `product.md` or `engineering.md` expect
 
 ### Phase 5: Generate implementation.md
 
-Write the file to `features/{feature}/implementation.md` using the project template as a base (`features/_template/implementation.md`) but filling it with real data from your exploration.
+Write the file to `context/{feature}/implementation.md` using the project template as a base (`context/_template/implementation.md`) but filling it with real data from your exploration.
 
 Key principles:
 - **Be specific.** File paths, function names, table names, queue names — all real, all from the code.
@@ -104,7 +107,7 @@ Before finishing, verify:
 - [ ] Data model includes actual schema definitions from code, not summaries
 - [ ] Events and queues use actual names from the codebase
 - [ ] Known limitations are documented honestly
-- [ ] Recent changes section has at least one entry based on recent git history
+- [ ] Edge cases and non-obvious behavior are captured
 
 ## Output
 

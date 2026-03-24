@@ -3,7 +3,7 @@ name: ctx-map-product
 description: Build the product.md for a feature by exploring the codebase and talking to the developer to define use cases, business rules, and scope. Use when mapping an existing feature's product definition.
 metadata:
   author: nicolasse
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # Map Feature Product
@@ -28,7 +28,7 @@ The user provides a **feature name**.
 
 ### Feature Resolution
 
-1. List all directories under `features/`
+1. List all directories under `context/`
 2. Match the user's request semantically
 3. **If confident:** confirm and proceed
 4. **If ambiguous or no match:** list available features and ask
@@ -37,7 +37,7 @@ If the feature directory doesn't exist yet, ask the user if they want to create 
 
 ### Overwrite Check
 
-If `features/{feature}/product.md` already exists and has content beyond the template:
+If `context/{feature}/product.md` already exists and has content beyond the template:
 - Show the user what's currently there
 - Ask explicitly: overwrite, merge with new findings, or cancel
 - Do NOT overwrite without confirmation
@@ -46,8 +46,9 @@ If `features/{feature}/product.md` already exists and has content beyond the tem
 
 ### Phase 1: Discover from code
 
-List directories inside `repositories/`. Explore relevant repos to understand what this feature does:
+List directories at the workspace root (skip `context/`). **Use an agent to explore the repos** — spawn a single agent to search across all repos for feature-related code:
 
+- Triggers → how does a user (or system) initiate this feature? (UI action, cron, event, API call)
 - UI components and pages → user-facing behavior
 - API endpoints → capabilities
 - Event handlers → reactive behavior
@@ -65,7 +66,7 @@ Iterate until the developer confirms.
 
 ### Phase 3: Write product.md
 
-Follow the template at `features/_template/product.md`. Keep it minimal.
+Follow the template at `context/_template/product.md`. Keep it minimal.
 
 ### Phase 4: Review
 
