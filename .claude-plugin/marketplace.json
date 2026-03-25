@@ -1,0 +1,14 @@
+{
+  "name": "nicolasse-ctx",
+  "owner": {
+    "name": "nicolasse"
+  },
+  "plugins": [
+    {
+      "name": "ctx",
+      "description": "A context layer for multi-repo workspaces. Maps features across repositories with product definitions, engineering contracts, and implementation docs — designed for AI-assisted development.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}
