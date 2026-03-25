@@ -14,10 +14,11 @@ Skills use these files to implement new use cases, review contracts, and map exi
 
 ## Install
 
-This is a [Claude Code plugin](https://code.claude.com/docs/en/plugins). Install it from the plugin manager or with:
+This is a [Claude Code plugin](https://docs.anthropic.com/en/docs/claude-code/plugins). Add the marketplace and install:
 
 ```bash
-/plugin install nicolasse/ctx
+claude plugin marketplace add nicolasse/ctx
+claude plugin install ctx
 ```
 
 To test locally during development:
@@ -53,6 +54,7 @@ claude
 | `/ctx:pull-repos` | Clone repos from `config.json` into the workspace root |
 | `/ctx:add-feature` | Design and implement a new feature from scratch |
 | `/ctx:add-use-case` | Add a use case to an existing feature with contract validation |
+| `/ctx:modify-feature` | Modify an existing feature — loads context, implements changes, validates, updates docs |
 | `/ctx:map-product` | Explores repos + talks to you → generates `product.md` |
 | `/ctx:map-engineering` | Explores repos → extracts technical contracts into `engineering.md` |
 | `/ctx:map-implementation` | Explores repos → maps current implementation into `implementation.md` |
@@ -90,6 +92,9 @@ my-project/
 
 **Adding behavior to an existing feature:**
 1. `/ctx:add-use-case` — implements, validates contracts, updates context files
+
+**Modifying an existing feature:**
+1. `/ctx:modify-feature` — describe the change, implements it, validates, updates context files
 
 **Sharing the workspace:**
 1. `/ctx:export` — generates `context/config.json` with all repo URLs
