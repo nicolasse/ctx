@@ -1,11 +1,11 @@
 ---
 name: add-index
-description: Scan workspace repos and generate context/index.md — a comprehensive big-picture map of the entire project including domain glossary, services, flows, and dependencies.
+description: Scan workspace repos and generate _ctx/index.md — a comprehensive big-picture map of the entire project including domain glossary, services, flows, and dependencies.
 ---
 
 # Generate Project Index
 
-Scans all repos in the workspace and generates `context/index.md` — a comprehensive big-picture map of the entire project. This index is the entry point for understanding the system before creating new features.
+Scans all repos in the workspace and generates `_ctx/index.md` — a comprehensive big-picture map of the entire project. This index is the entry point for understanding the system before creating new features.
 
 ## When to use
 
@@ -15,13 +15,13 @@ Scans all repos in the workspace and generates `context/index.md` — a comprehe
 
 ## Output
 
-A single file: `context/index.md` — overwritten each time this skill runs.
+A single file: `_ctx/index.md` — overwritten each time this skill runs.
 
 ## Workflow
 
 ### 1. Discover repos
 
-List all directories at the workspace root. Each directory with a `.git` folder is a repo. Skip `context/` and any non-repo directories (no `.git`).
+List all directories at the workspace root. Each directory with a `.git` folder is a repo. Skip `_ctx/` and any non-repo directories (no `.git`).
 
 Record the full list of repos found.
 
@@ -67,7 +67,7 @@ Launch a single Explore agent that covers all repos in one pass. The agent must 
 
 ### 3. Generate index.md
 
-**Wait for the agent from step 2 to complete.** Use the agent's output as the primary source for generating `context/index.md`. Follow this exact structure. Write in **English**. Be thorough but concise — every line should add information.
+**Wait for the agent from step 2 to complete.** Use the agent's output as the primary source for generating `_ctx/index.md`. Follow this exact structure. Write in **English**. Be thorough but concise — every line should add information.
 
 ```markdown
 # {Project Name} — Context Map
@@ -184,7 +184,7 @@ VAR_NAME    # what it does
 
 ### 4. Review with user
 
-Show the generated `index.md` to the user. Iterate if they want changes. Write the final version.
+Show the generated `_ctx/index.md` to the user. Iterate if they want changes. Write the final version.
 
 ### 5. Summary
 

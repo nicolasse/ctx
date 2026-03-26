@@ -15,7 +15,7 @@ The user provides a **feature name** (e.g., "follow-ups", "RAG catalog", "web ch
 
 ### Feature Resolution
 
-1. List all directories under `context/`
+1. List all directories under `_ctx/`
 2. Match the user's request semantically (e.g., "seguimiento", "follow up", "followUps" → `follow-up/`)
 3. **If confident:** confirm which feature you matched and proceed
 4. **If ambiguous or no match:** list available features and ask the user to pick
@@ -24,7 +24,7 @@ If the feature directory doesn't exist yet, ask the user if they want to create 
 
 ### Overwrite Check
 
-If `context/{feature}/implementation.md` already exists and has content beyond the template:
+If `_ctx/{feature}/implementation.md` already exists and has content beyond the template:
 - Show the user what's currently there
 - Ask explicitly: overwrite, merge with new findings, or cancel
 - Do NOT overwrite without confirmation
@@ -34,14 +34,14 @@ If `context/{feature}/implementation.md` already exists and has content beyond t
 ### Phase 1: Load existing context
 
 Read whatever already exists for this feature:
-- `context/{feature}/product.md` — understand what this feature is supposed to do
-- `context/{feature}/engineering.md` — understand the expected interfaces and constraints
+- `_ctx/{feature}/product.md` — understand what this feature is supposed to do
+- `_ctx/{feature}/engineering.md` — understand the expected interfaces and constraints
 
 These files give you a hypothesis of what to look for. If they don't exist or are empty, work from the feature name alone.
 
 ### Phase 2: Discover repos
 
-List all directories at the workspace root (skip `context/`). Each directory with a `.git` folder is a repo to potentially explore.
+List all directories at the workspace root (skip `_ctx/`). Each directory with a `.git` folder is a repo to potentially explore.
 
 ### Phase 3: Deep exploration across repos
 
@@ -79,7 +79,7 @@ From your exploration, build a complete picture:
 
 ### Phase 5: Generate implementation.md
 
-Write the file to `context/{feature}/implementation.md` using the project template as a base (`context/_template/implementation.md`) but filling it with real data from your exploration.
+Write the file to `_ctx/{feature}/implementation.md` using the project template as a base (`_ctx/_template/implementation.md`) but filling it with real data from your exploration.
 
 Key principles:
 - **Be specific.** File paths, function names, table names, queue names — all real, all from the code.

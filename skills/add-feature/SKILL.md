@@ -15,7 +15,7 @@ The user describes what they want to build. Can be vague ("I need follow-up remi
 
 ### 0. Load Project Context
 
-If `context/index.md` exists, read it first. This is the big-picture map of the entire project — domain glossary, services, flows, and dependencies. Use it to inform your understanding of where the new feature fits, which services are involved, and what patterns already exist. This avoids redundant exploration in later steps.
+If `_ctx/index.md` exists, read it first. This is the big-picture map of the entire project — domain glossary, services, flows, and dependencies. Use it to inform your understanding of where the new feature fits, which services are involved, and what patterns already exist. This avoids redundant exploration in later steps.
 
 ### 1. Understand the Feature
 
@@ -33,7 +33,7 @@ Keep it short. Don't interrogate — 2-3 questions max per round, stop when you 
 
 Pick a kebab-case name for the feature. Confirm with the user.
 
-Create `context/{feature}/` and copy the three template files from `context/_template/`.
+Create `_ctx/{feature}/` and copy the three template files from `_ctx/_template/`.
 
 ### 3. Write product.md
 
@@ -50,7 +50,7 @@ Show it to the user. Iterate until they confirm. Write the file.
 
 Now look at the existing codebase to inform the technical design. **Use an agent to explore the repos** — spawn a single agent to search across all repos for relevant patterns, interfaces, and conventions:
 
-- List directories at the workspace root (skip `context/`) to understand what services exist
+- List directories at the workspace root (skip `_ctx/`) to understand what services exist
 - Look at similar features to understand patterns, conventions, and how services communicate
 - Identify which repos will need changes for the new feature
 - Understand existing interfaces the new feature needs to integrate with

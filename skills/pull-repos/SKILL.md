@@ -5,17 +5,17 @@ description: Clone all repos from config.json into the workspace root. Skips rep
 
 # Pull Repos
 
-Reads the repo list from `context/config.json` at the workspace root and clones any missing repos into the workspace root.
+Reads the repo list from `_ctx/config.json` at the workspace root and clones any missing repos into the workspace root.
 
 ## Workflow
 
 ### 1. Read config
 
-Read `context/config.json`. Parse the `repos` array. Each entry is a plain URL string (the git clone URL).
+Read `_ctx/config.json`. Parse the `repos` array. Each entry is a plain URL string (the git clone URL).
 
-If `context/config.json` doesn't exist or has no `repos` key, tell the user and stop.
+If `_ctx/config.json` doesn't exist or has no `repos` key, tell the user and stop.
 
-If the `repos` array is empty, tell the user there are no repos configured and suggest they run `/ctx-export` or add entries to `context/config.json` manually.
+If the `repos` array is empty, tell the user there are no repos configured and suggest they run `/ctx-export` or add entries to `_ctx/config.json` manually.
 
 ### 2. Clone missing repos
 

@@ -15,7 +15,7 @@ The user describes what they want to change. Can be behavioral ("make follow-ups
 
 ### 1. Feature Resolution
 
-List all directories under `context/`.
+List all directories under `_ctx/`.
 Match the user's request to the most likely feature directory based on semantic understanding.
 
 **If confident** (single obvious candidate), confirm and proceed.
@@ -26,9 +26,9 @@ Never create a new feature directory. The feature must already exist with all th
 ### 2. Load Context
 
 Read all three context files:
-- `context/{feature}/product.md`
-- `context/{feature}/engineering.md`
-- `context/{feature}/implementation.md`
+- `_ctx/{feature}/product.md`
+- `_ctx/{feature}/engineering.md`
+- `_ctx/{feature}/implementation.md`
 
 If any file is missing, inform the user and suggest mapping the feature first.
 

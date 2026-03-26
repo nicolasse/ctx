@@ -25,7 +25,7 @@ The user provides a **feature name**.
 
 ### Feature Resolution
 
-1. List all directories under `context/`
+1. List all directories under `_ctx/`
 2. Match the user's request semantically
 3. **If confident:** confirm and proceed
 4. **If ambiguous or no match:** list available features and ask
@@ -34,7 +34,7 @@ If the feature directory doesn't exist yet, ask the user if they want to create 
 
 ### Overwrite Check
 
-If `context/{feature}/engineering.md` already exists and has content beyond the template:
+If `_ctx/{feature}/engineering.md` already exists and has content beyond the template:
 - Show the user what's currently there
 - Ask explicitly: overwrite, merge with new findings, or cancel
 - Do NOT overwrite without confirmation
@@ -43,11 +43,11 @@ If `context/{feature}/engineering.md` already exists and has content beyond the 
 
 ### Phase 1: Load existing context
 
-If available, read `context/{feature}/product.md` to understand what use cases to look for.
+If available, read `_ctx/{feature}/product.md` to understand what use cases to look for.
 
 ### Phase 2: Discover and explore repos
 
-List directories at the workspace root (skip `context/`). **Use an agent to explore the repos** — spawn a single agent to search across all repos for contracts, interfaces, and patterns. Focus on:
+List directories at the workspace root (skip `_ctx/`). **Use an agent to explore the repos** — spawn a single agent to search across all repos for contracts, interfaces, and patterns. Focus on:
 
 - API contracts and event schemas — the boundaries between services
 - Inter-service communication — Kafka topics, SQS queues, RPC calls, HTTP endpoints with actual names
@@ -67,7 +67,7 @@ You will find a lot. **Most of it doesn't belong in engineering.md.** Apply this
 
 ### Phase 4: Write engineering.md
 
-Follow the template at `context/_template/engineering.md`. Keep it minimal. When you include a code snippet, include **only** the type/schema itself — no surrounding context, no imports, no comments.
+Follow the template at `_ctx/_template/engineering.md`. Keep it minimal. When you include a code snippet, include **only** the type/schema itself — no surrounding context, no imports, no comments.
 
 ### Phase 5: Review
 

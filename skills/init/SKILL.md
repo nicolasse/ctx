@@ -13,14 +13,14 @@ Run this once after cloning your repos into the workspace root.
 
 Before scanning repos, ensure the workspace has the required structure. If any of these are missing, create them:
 
-- `context/` — where feature context files live
-- `context/_template/` — with the three template files (product.md, engineering.md, implementation.md)
-- `context/CLAUDE.md` — agent instructions for the context directory
+- `_ctx/` — where feature context files live
+- `_ctx/_template/` — with the three template files (product.md, engineering.md, implementation.md)
+- `_ctx/CLAUDE.md` — agent instructions for the _ctx directory
 - `CLAUDE.md` — workspace-level instructions
 
 The templates and instructions are bundled with this skill. If the files don't exist, generate them from the templates below.
 
-### context/CLAUDE.md
+### _ctx/CLAUDE.md
 
 ```markdown
 # Context — Agent Instructions
@@ -31,7 +31,7 @@ This directory contains the product, engineering, and implementation context for
 
 ## Structure
 
-context/
+_ctx/
   _template/          # Templates for creating new features
   {feature-name}/
     product.md        # WHAT: product definition, use cases, business rules
@@ -52,7 +52,7 @@ context/
 When resolving a feature name from a user request, list the directories here and match semantically. Users may refer to features by aliases, abbreviations, or in different languages. If uncertain, ask.
 ```
 
-### context/_template/product.md
+### _ctx/_template/product.md
 
 ```markdown
 # {Feature Name}
@@ -74,7 +74,7 @@ When resolving a feature name from a user request, list the directories here and
 - {What this feature does NOT do}
 ```
 
-### context/_template/engineering.md
+### _ctx/_template/engineering.md
 
 ```markdown
 # {Feature Name} — Engineering
@@ -97,7 +97,7 @@ When resolving a feature name from a user request, list the directories here and
 - {How things are done in this feature, one line each}
 ```
 
-### context/_template/implementation.md
+### _ctx/_template/implementation.md
 
 ```markdown
 # {Feature Name} — Implementation
@@ -146,7 +146,7 @@ This is a multi-repo workspace.
 ## Structure
 
 - Repos live at the workspace root. Each subdirectory with a `.git` folder is a repo.
-- `context/` — Product, engineering, and implementation context for each feature. See `context/CLAUDE.md`.
+- `_ctx/` — Product, engineering, and implementation context for each feature. See `_ctx/CLAUDE.md`.
 
 ## Repos
 
@@ -154,9 +154,9 @@ To discover available repos, list directories at the workspace root and check wh
 
 ## Context
 
-The `context/` directory contains the source of truth for understanding, implementing, and validating changes across repos.
+The `_ctx/` directory contains the source of truth for understanding, implementing, and validating changes across repos.
 
-When working on a feature, always check `context/` for existing context before exploring repos from scratch.
+When working on a feature, always check `_ctx/` for existing context before exploring repos from scratch.
 ```
 
 ## Workflow
@@ -171,11 +171,11 @@ If the folder is already named something other than the default, confirm with th
 
 ### 2. Init context git
 
-If `context/` doesn't have a `.git` directory, run `git init` inside it so the project context is its own repo from the start.
+If `_ctx/` doesn't have a `.git` directory, run `git init` inside it so the project context is its own repo from the start.
 
 ### 3. Discover repos
 
-List all directories at the workspace root. Each directory with a `.git` folder is a repo. Skip `context/` — it's the context repo, not a code repo.
+List all directories at the workspace root. Each directory with a `.git` folder is a repo. Skip `_ctx/` — it's the context repo, not a code repo.
 
 ### 4. Deep scan each repo
 
@@ -237,7 +237,7 @@ Distill everything into a concise map. You explored deep — now write short. On
 | Payments | repo-a, repo-d | No |
 ```
 
-Write to `context/WORKSPACE.md`.
+Write to `_ctx/WORKSPACE.md`.
 
 ### 8. Summary
 

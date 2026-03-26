@@ -25,7 +25,7 @@ The user provides a **feature name**.
 
 ### Feature Resolution
 
-1. List all directories under `context/`
+1. List all directories under `_ctx/`
 2. Match the user's request semantically
 3. **If confident:** confirm and proceed
 4. **If ambiguous or no match:** list available features and ask
@@ -34,7 +34,7 @@ If the feature directory doesn't exist yet, ask the user if they want to create 
 
 ### Overwrite Check
 
-If `context/{feature}/product.md` already exists and has content beyond the template:
+If `_ctx/{feature}/product.md` already exists and has content beyond the template:
 - Show the user what's currently there
 - Ask explicitly: overwrite, merge with new findings, or cancel
 - Do NOT overwrite without confirmation
@@ -43,7 +43,7 @@ If `context/{feature}/product.md` already exists and has content beyond the temp
 
 ### Phase 1: Discover from code
 
-List directories at the workspace root (skip `context/`). **Use an agent to explore the repos** — spawn a single agent to search across all repos for feature-related code:
+List directories at the workspace root (skip `_ctx/`). **Use an agent to explore the repos** — spawn a single agent to search across all repos for feature-related code:
 
 - Triggers → how does a user (or system) initiate this feature? (UI action, cron, event, API call)
 - UI components and pages → user-facing behavior
@@ -63,7 +63,7 @@ Iterate until the developer confirms.
 
 ### Phase 3: Write product.md
 
-Follow the template at `context/_template/product.md`. Keep it minimal.
+Follow the template at `_ctx/_template/product.md`. Keep it minimal.
 
 ### Phase 4: Review
 

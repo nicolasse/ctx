@@ -13,21 +13,21 @@ Invoked as a subagent from skills (e.g., `add-use-case`, `add-feature`) or direc
 
 ## Input
 
-- **Feature name** (resolved semantically — see `context/CLAUDE.md`)
+- **Feature name** (resolved semantically — see `_ctx/CLAUDE.md`)
 - **Scope** (optional): specific files or a diff to review. If not provided, reviews the full feature.
 
 ## Workflow
 
 ### 1. Feature Resolution
 
-List directories under `context/`, match semantically, confirm or ask.
+List directories under `_ctx/`, match semantically, confirm or ask.
 
 ### 2. Load Context
 
 Read all three context files for the resolved feature:
-- `context/{feature}/product.md`
-- `context/{feature}/engineering.md`
-- `context/{feature}/implementation.md`
+- `_ctx/{feature}/product.md`
+- `_ctx/{feature}/engineering.md`
+- `_ctx/{feature}/implementation.md`
 
 ### 3. Gather Changes
 

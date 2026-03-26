@@ -11,7 +11,7 @@ Implements a new use case for an existing feature, maintaining consistency with 
 
 ### 1. Feature Resolution
 
-List all directories under `context/`.
+List all directories under `_ctx/`.
 Match the user's request to the most likely feature directory based on semantic understanding. Examples:
 - "follow up", "followUps", "seguimiento" → `follow-up/`
 - "booking", "reservas", "citas" → `booking/`
@@ -23,7 +23,7 @@ Never guess. Never create a new feature directory in this command.
 
 ### 2. Duplicate Check
 
-Read `context/{feature}/product.md`.
+Read `_ctx/{feature}/product.md`.
 Check if the requested use case already exists — consider semantic equivalence, not just exact text match. A use case described differently but covering the same behavior counts as existing.
 
 - If it exists: inform the user and stop.
