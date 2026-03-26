@@ -11,7 +11,13 @@ Scans root-level directories for git repos and creates/updates `_ctx/config.json
 
 ### 1. Ensure _ctx directory
 
-If `_ctx/` doesn't exist, create it.
+If `_ctx/` doesn't exist, create it. Also create `_ctx/README.md` if it doesn't exist:
+
+```markdown
+Feature context for Claude Code — product definitions, engineering contracts, and implementation docs across repos.
+
+Created with [ctx](https://github.com/nicolasse/ctx).
+```
 
 ### 2. Scan repos
 

@@ -14,11 +14,20 @@ Run this once after cloning your repos into the workspace root.
 Before scanning repos, ensure the workspace has the required structure. If any of these are missing, create them:
 
 - `_ctx/` — where feature context files live
+- `_ctx/README.md` — short description of the _ctx directory
 - `_ctx/_template/` — with the three template files (product.md, engineering.md, implementation.md)
 - `_ctx/CLAUDE.md` — agent instructions for the _ctx directory
 - `CLAUDE.md` — workspace-level instructions
 
 The templates and instructions are bundled with this skill. If the files don't exist, generate them from the templates below.
+
+### _ctx/README.md
+
+```markdown
+Feature context for Claude Code — product definitions, engineering contracts, and implementation docs across repos.
+
+Created with [ctx](https://github.com/nicolasse/ctx).
+```
 
 ### _ctx/CLAUDE.md
 
