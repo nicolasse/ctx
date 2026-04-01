@@ -150,7 +150,7 @@ When resolving a feature name from a user request, list the directories here and
 ```markdown
 # Workspace
 
-This is a multi-repo workspace.
+This is a multi-repo workspace managed with the ctx plugin.
 
 ## Structure
 
@@ -166,6 +166,39 @@ To discover available repos, list directories at the workspace root and check wh
 The `_ctx/` directory contains the source of truth for understanding, implementing, and validating changes across repos.
 
 When working on a feature, always check `_ctx/` for existing context before exploring repos from scratch.
+
+## Automatic Skill Routing
+
+When the user asks to work on a feature, do NOT wait for an explicit slash command. Determine the right ctx skill automatically:
+
+### 1. Resolve the feature
+
+List directories under `_ctx/` (excluding `_template/`). Match the user's request semantically against existing feature names.
+
+### 2. Route to the right skill
+
+| Situation | Skill |
+|---|---|
+| Feature **exists** in `_ctx/` and user wants to **change** it | `ctx:modify-feature` |
+| Feature **does not exist** in `_ctx/` and user wants to **build** something new | `ctx:add-feature` |
+| Feature exists and user wants to **add a new use case** | `ctx:add-use-case` |
+
+### 3. Mapping requests
+
+When the user asks to map, document, or understand a feature, ask which context files they need:
+
+> "Do you want to map all three files (product, engineering, implementation) or a specific one?"
+
+Then invoke the corresponding skill(s): `ctx:map-product`, `ctx:map-engineering`, `ctx:map-implementation`.
+
+### 4. Workspace setup
+
+| Situation | Skill |
+|---|---|
+| No `_ctx/WORKSPACE.md` exists | `ctx:init` |
+| Need to generate or refresh the project index | `ctx:add-index` |
+| Need to export config for sharing | `ctx:export` |
+| Need to clone repos from config | `ctx:pull-repos` |
 ```
 
 ## Workflow

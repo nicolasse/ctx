@@ -58,6 +58,7 @@ claude
 | `/ctx:map-product` | Explores repos + talks to you → generates `product.md` |
 | `/ctx:map-engineering` | Explores repos → extracts technical contracts into `engineering.md` |
 | `/ctx:map-implementation` | Explores repos → maps current implementation into `implementation.md` |
+| `/ctx:update` | Update workspace scaffolding files (CLAUDE.md, templates) to latest plugin version |
 
 ## Workspace structure
 
@@ -74,6 +75,24 @@ my-project/
   repo-a/                    ← repos live at the root
   repo-b/
 ```
+
+## Automatic Routing
+
+Users don't need to remember slash commands. When a user asks to work on a feature, route automatically:
+
+1. **Resolve**: list directories under `_ctx/` (skip `_template/`), match the request semantically.
+2. **Route**:
+
+| Situation | Skill |
+|---|---|
+| Feature **exists** in `_ctx/`, user wants to **change** it | `ctx:modify-feature` |
+| Feature **does not exist**, user wants to **build** something new | `ctx:add-feature` |
+| Feature exists, user wants to **add a new use case** | `ctx:add-use-case` |
+| User asks to **map/document** a feature | Ask: "All three files (product, engineering, implementation) or a specific one?" Then run the matching `ctx:map-*` skill(s) |
+| No `_ctx/WORKSPACE.md` | `ctx:init` |
+| Need project index | `ctx:add-index` |
+| Need to export/share | `ctx:export` |
+| Need to clone repos | `ctx:pull-repos` |
 
 ## Workflow
 
