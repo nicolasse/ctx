@@ -119,3 +119,19 @@ Users don't need to remember slash commands. When a user asks to work on a featu
 1. `/ctx:export` — generates `_ctx/config.json` with all repo URLs
 2. Push the `_ctx/` repo to GitHub
 3. Others clone it and run `/ctx:pull-repos` to get all repos
+
+## Updating
+
+To update the plugin:
+
+```bash
+claude plugin marketplace update nicolasse-ctx && claude plugin update ctx@nicolasse-ctx
+```
+
+To create a shell alias for quick updates, add this to your `~/.zshrc` (or `~/.bashrc`):
+
+```bash
+alias ctx-update="claude plugin marketplace update nicolasse-ctx && claude plugin update ctx@nicolasse-ctx"
+```
+
+Then reload your shell (`source ~/.zshrc`) and run `ctx-update` anytime.
