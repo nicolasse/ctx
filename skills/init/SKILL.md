@@ -181,6 +181,7 @@ List directories under `_ctx/` (excluding `_template/`). Match the user's reques
 |---|---|
 | Feature **exists** in `_ctx/` and user wants to **change** it | `ctx:modify-feature` |
 | Feature **does not exist** in `_ctx/` and user wants to **build** something new | `ctx:add-feature` |
+| Feature **does not exist** in `_ctx/` but user says it **exists in the code** — it needs mapping | `ctx:map-*` |
 | Feature exists and user wants to **add a new use case** | `ctx:add-use-case` |
 
 ### 3. Mapping requests
