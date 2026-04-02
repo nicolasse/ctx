@@ -155,15 +155,17 @@ This is a multi-repo workspace managed with the ctx plugin.
 ## Structure
 
 - Repos live at the workspace root. Each subdirectory with a `.git` folder is a repo.
-- `_ctx/` — Product, engineering, and implementation context for each feature. See `_ctx/CLAUDE.md`.
+- `_ctx/` — Context only. Contains product, engineering, and implementation documentation for features. It is NOT a code directory.
 
 ## Repos
 
 To discover available repos, list directories at the workspace root and check which ones contain a `.git` folder. Do not hardcode repo names — they may change.
 
-## Context
+## Where to work
 
-The `_ctx/` directory contains the source of truth for understanding, implementing, and validating changes across repos.
+- **Code changes** go in the repo folders at the workspace root — never in `_ctx/`.
+- **`_ctx/`** is the context layer that describes what the repos do, how features are designed, and how they are implemented. Read it to understand, but do not modify it directly unless running a `ctx:map-*` or `ctx:add-*` skill.
+- Do not modify files outside the workspace root. All work happens inside the repos at this level.
 
 When working on a feature, always check `_ctx/` for existing context before exploring repos from scratch.
 
