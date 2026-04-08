@@ -74,17 +74,13 @@ If the feature is large, break it into multiple chunks — one per use case or l
 
 ### 6. Validate
 
-After implementation, review the changes against both contracts:
+After implementation, spawn the **contract-reviewer agent** (`ctx:contract-reviewer`) with:
+- The feature name
+- The scope: the list of files that were created or modified
 
-**Product contract (`product.md`):**
-- Do all use cases work as described?
-- Are business rules enforced?
+The contract-reviewer will check the changes against both product and engineering contracts and report violations, warnings, and implementation drift suggestions.
 
-**Engineering contract (`engineering.md`):**
-- Are all interfaces and contracts respected?
-- Do naming conventions and patterns match?
-
-If violations: fix them before proceeding.
+If violations are found: fix them before proceeding.
 
 ### 7. Write implementation.md
 

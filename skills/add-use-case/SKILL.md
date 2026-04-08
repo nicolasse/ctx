@@ -41,19 +41,13 @@ Stay scoped. Only modify files related to the feature. If the change requires to
 
 ### 4. Contract Validation
 
-After implementation, validate the changes against both contracts:
+After implementation, spawn the **contract-reviewer agent** (`ctx:contract-reviewer`) with:
+- The feature name
+- The scope: the list of files that were modified
 
-**Product contract (`product.md`):**
-- Do all previously defined use cases still work as described?
-- Does the new use case behave as requested?
-- Are there contradictions with existing product definitions?
+The contract-reviewer will check the changes against both product and engineering contracts and report violations, warnings, and implementation drift suggestions.
 
-**Engineering contract (`engineering.md`):**
-- Are all interfaces and contracts respected?
-- Do naming conventions and patterns match?
-- Are there breaking changes to APIs or data models?
-
-**If validation fails:** revert code changes and report what broke.
+**If validation fails** (violations found): revert code changes and report what broke.
 **If validation passes:** proceed to context update.
 
 ### 5. Context Update

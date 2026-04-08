@@ -52,17 +52,13 @@ The agent implements the code changes and reports back.
 
 ### 5. Validation
 
-After the agent completes, validate:
+After the agent completes, spawn the **contract-reviewer agent** (`ctx:contract-reviewer`) with:
+- The feature name
+- The scope: the list of files that were modified
 
-**Product contract (`product.md`):**
-- Do all use cases still work as described (unless the change explicitly modifies them)?
-- Are business rules still enforced?
+The contract-reviewer will check the changes against both product and engineering contracts and report violations, warnings, and implementation drift suggestions.
 
-**Engineering contract (`engineering.md`):**
-- Are interfaces and contracts respected (unless the change explicitly modifies them)?
-- Do patterns and conventions still match?
-
-**If violations are found:** report them. Fix if straightforward, otherwise ask the developer.
+**If violations are found:** fix if straightforward, otherwise report them to the developer before proceeding to context update.
 
 ### 6. Context Update
 
