@@ -155,46 +155,80 @@ This is a multi-repo workspace managed with the ctx plugin.
 ## Structure
 
 - Repos live at the workspace root. Each subdirectory with a `.git` folder is a repo.
-- `_ctx/` — Context only. Contains product, engineering, and implementation documentation for features. It is NOT a code directory.
+- `_ctx/` — Context layer. Product, engineering, and implementation docs for features. NOT a code directory.
 
-## Repos
+To discover repos, list directories at the workspace root and check for `.git` folders. Do not hardcode repo names.
 
-To discover available repos, list directories at the workspace root and check which ones contain a `.git` folder. Do not hardcode repo names — they may change.
+## Default Workflow
+
+**Every task follows this workflow. Do not skip steps.**
+
+### 1. Load context first
+
+Before doing anything else:
+
+1. Read `_ctx/WORKSPACE.md` if it exists — this is the architecture map.
+2. Read `_ctx/index.md` if it exists — this is the domain glossary and service map.
+3. List `_ctx/` directories to see which features have context.
+
+Never explore repos from scratch when context files already exist.
+
+### 2. Resolve the feature
+
+Match the user's request to a feature directory in `_ctx/`. Match semantically — users may use aliases, abbreviations, or different languages.
+
+- Feature matches → read its three context files (`product.md`, `engineering.md`, `implementation.md`) before proceeding.
+- Multiple features involved → load all relevant ones.
+- No match → this is either a new feature or unmapped existing code. Route accordingly in step 3.
+
+### 3. Route through a skill — do not code directly
+
+Feature work MUST go through ctx skills. They handle context loading, agent spawning, contract validation, and context updates. Coding directly skips all of that.
+
+| The user wants to... | Skill |
+|---|---|
+| **Change** an existing mapped feature | `ctx:modify-feature` |
+| **Add a use case** to an existing feature | `ctx:add-use-case` |
+| **Build** something new that doesn't exist | `ctx:add-feature` |
+| **Map** existing code that has no context yet | Ask which files: `ctx:map-product`, `ctx:map-engineering`, `ctx:map-implementation` |
+| **Review** contracts against current code | `ctx:review-features` |
+
+Do NOT wait for the user to type a slash command. Determine the right skill automatically based on intent.
+
+### 4. Validate after changes
+
+After any code change to a mapped feature, validate against contracts:
+
+- **Product contract**: All use cases still work? Business rules enforced?
+- **Engineering contract**: Interfaces respected? Patterns followed?
+
+If the skill already includes validation (modify-feature, add-use-case, add-feature do), this is covered. Otherwise, run `ctx:review-features`.
+
+### 5. Keep context in sync
+
+After implementing, context files must reflect the new state:
+
+- `implementation.md` — always update after code changes
+- `product.md` / `engineering.md` — update only if contracts changed
+
+The ctx skills handle this automatically. If you bypassed a skill, update manually.
+
+## When you can skip the full workflow
+
+Some tasks don't need a skill:
+
+- **Quick lookups** — "Where is X defined?" → search directly, but still check `_ctx/` first for a faster answer
+- **Single-file bug fixes** — read the feature context first for understanding, but a full modifier agent isn't needed
+- **Non-feature work** — CI, dependencies, tooling, infrastructure
+
+Even for these, **always read relevant context from `_ctx/` before exploring repos**.
 
 ## Where to work
 
-- **Code changes** go in the repo folders at the workspace root — never in `_ctx/`.
-- **`_ctx/`** is the context layer that describes what the repos do, how features are designed, and how they are implemented. Read it to understand, but do not modify it directly unless running a `ctx:map-*` or `ctx:add-*` skill.
-- Do not modify files outside the workspace root. All work happens inside the repos at this level.
+- **Code changes** → repo folders at the workspace root. Never in `_ctx/`.
+- **Context changes** → only through ctx skills (`ctx:map-*`, `ctx:modify-feature`, etc.). Do not edit `_ctx/` files directly.
 
-When working on a feature, always check `_ctx/` for existing context before exploring repos from scratch.
-
-## Automatic Skill Routing
-
-When the user asks to work on a feature, do NOT wait for an explicit slash command. Determine the right ctx skill automatically:
-
-### 1. Resolve the feature
-
-List directories under `_ctx/` (excluding `_template/`). Match the user's request semantically against existing feature names.
-
-### 2. Route to the right skill
-
-| Situation | Skill |
-|---|---|
-| Feature **exists** in `_ctx/` and user wants to **change** it | `ctx:modify-feature` |
-| Feature **does not exist** in `_ctx/` and user wants to **build** something new | `ctx:add-feature` |
-| Feature **does not exist** in `_ctx/` but user says it **exists in the code** — it needs mapping | `ctx:map-*` |
-| Feature exists and user wants to **add a new use case** | `ctx:add-use-case` |
-
-### 3. Mapping requests
-
-When the user asks to map, document, or understand a feature, ask which context files they need:
-
-> "Do you want to map all three files (product, engineering, implementation) or a specific one?"
-
-Then invoke the corresponding skill(s): `ctx:map-product`, `ctx:map-engineering`, `ctx:map-implementation`.
-
-### 4. Workspace setup
+## Workspace setup
 
 | Situation | Skill |
 |---|---|
@@ -202,6 +236,7 @@ Then invoke the corresponding skill(s): `ctx:map-product`, `ctx:map-engineering`
 | Need to generate or refresh the project index | `ctx:add-index` |
 | Need to export config for sharing | `ctx:export` |
 | Need to clone repos from config | `ctx:pull-repos` |
+| Update scaffolding after plugin update | `ctx:update` |
 ```
 
 ## Workflow
